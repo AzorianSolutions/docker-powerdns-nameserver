@@ -43,7 +43,7 @@ When building this image, support for the following features have been compiled 
 ### Debian Linux
 
 - 4.5.1-debian-11.1-slim
-- 4.5.1-debian-11.1-slim-mysql
+- 4.5.1-debian-mysql, 4.5.1-debian-11.1-slim-mysql
 
 ## Deploying this image
 
