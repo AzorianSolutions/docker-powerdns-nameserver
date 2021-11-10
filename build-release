@@ -1,0 +1,61 @@
+#!/bin/bash
+
+path=$PWD
+tag=latest
+version=4.5.1
+distro=alpine
+distro_tag=3.14
+
+if [ ! -z "$1" ];
+then
+    tag=$1
+fi
+
+if [ ! -z "$2" ];
+then
+    version=$2
+fi
+
+if [ ! -z "$3" ];
+then
+    distro=$3
+fi
+
+if [ ! -z "$4" ];
+then
+    distro_tag=$4
+fi
+
+if [ -f "$PWD/.as/docker-registry" ];
+then
+    docker_registry=`cat $PWD/.as/docker-registry`
+    source_tarball_release_uri=https://downloads.powerdns.com/releases/
+    source_tarball_name=pdns-${version}.tar.bz2
+    source_tarball_url=${source_tarball_release_uri}${source_tarball_name}
+    
+    if [ ! -f "$PWD/src/pdns-${version}.tar.bz2" ];
+    then
+        echo "Source tarball not found for version $version at $PWD/src/${source_tarball_name}. Downloading from $source_tarball_url"
+        curl -o $PWD/src/$source_tarball_name $source_tarball_url
+    else
+        echo "Source tarball found for version $version at $PWD/src/${source_tarball_name}."
+    fi
+    
+    if [ -f "$PWD/Dockerfile-$distro-$distro_tag" ];
+    then
+        docker_file=Dockerfile-$distro-$distro_tag
+    elif [ -f "$PWD/Dockerfile-$distro" ];
+    then
+        docker_file=Dockerfile-$distro
+    else
+        docker_file=Dockerfile
+    fi
+    
+    docker build --force-rm -f $PWD/$docker_file -t $docker_registry:$tag --build-arg AS_PDNS_VERSION=$version --build-arg DISTRO=$distro --build-arg DISTRO_TAG=$distro_tag $path
+    
+else
+    echo "Could not find a Docker registry URL file at $PWD/.as/docker-registry"
+    exit 1
+fi
+
+exit
