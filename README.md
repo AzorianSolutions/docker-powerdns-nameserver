@@ -35,14 +35,25 @@ When building this image, support for the following features have been compiled 
 
 ## Supported tags
 
+\* denotes an image that is planned but has not yet been released.
+
 ### Alpine Linux
 
-- 4.5.1, 4.5.1-alpine, 4.5.1-alpine-3.14, latest
+- 4.5.2, 4.5.2-alpine, 4.5.2-alpine-3.14, latest
+- 4.5.2-mysql, 4.5.2-alpine-mysql, 4.5.2-alpine-3.14-mysql
+- *4.5.2-pgsql, 4.5.2-alpine-pgsql, 4.5.2-alpine-3.14-pgsql
+- *4.5.2-sqlite, 4.5.2-alpine-sqlite, 4.5.2-alpine-3.14-sqlite
+- *4.5.2-odbc, 4.5.2-alpine-odbc, 4.5.2-alpine-3.14-odbc
+- 4.5.1, 4.5.1-alpine, 4.5.1-alpine-3.14
 - 4.5.1-mysql, 4.5.1-alpine-mysql, 4.5.1-alpine-3.14-mysql
 
 ### Debian Linux
 
-- 4.5.1-debian-11.1-slim
+- *4.5.2-debian, 4.5.2-debian-11.1-slim
+- 4.5.2-debian-mysql, 4.5.2-debian-11.1-slim-mysql
+- *4.5.2-debian-pgsql, 4.5.2-debian-11.1-slim-pgsql
+- *4.5.2-debian-sqlite, 4.5.2-debian-11.1-slim-sqlite
+- *4.5.2-debian-odbc, 4.5.2-debian-11.1-slim-odbc
 - 4.5.1-debian-mysql, 4.5.1-debian-11.1-slim-mysql
 
 ## Deploying this image
@@ -105,14 +116,6 @@ To run this image using Docker Compose, create a YAML file with a name and place
 Then execute the following Docker Compose command;
 
     docker-compose -u /path/to/yaml/file.yml
-
-### Deploy wit Podman
-
-Coming soon...
-
-### Deploy with Kubectl
-
-Coming soon...
 
 ## Building this image
 
