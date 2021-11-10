@@ -37,8 +37,8 @@ When building this image, support for the following features have been compiled 
 
 ### Alpine Linux
 
-- latest, 4.5.1, 4.5.1-alpine-3.14
-- 4.5.1-alpine-3.14-mysql
+- 4.5.1, 4.5.1-alpine, 4.5.1-alpine-3.14, latest
+- 4.5.1-mysql, 4.5.1-alpine-mysql, 4.5.1-alpine-3.14-mysql
 
 ### Debian Linux
 
