@@ -3,7 +3,7 @@ ARG DISTRO_TAG=3.14
 
 FROM ${DISTRO}:${DISTRO_TAG}
 
-ARG AS_PDNS_VERSION=4.5.1
+ARG AS_PDNS_VERSION=4.5.2
 
 ENV PDNS_setuid=${PDNS_setuid:-pdns} \
   PDNS_setgid=${PDNS_setgid:-pdns} \

@@ -2,7 +2,7 @@
 
 path=$PWD
 tag=latest
-version=4.5.1
+version=4.5.2
 distro=alpine
 distro_tag=3.14
 
