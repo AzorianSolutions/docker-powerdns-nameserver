@@ -3,7 +3,7 @@ ARG DISTRO_TAG=11.1-slim
 
 FROM ${DISTRO}:${DISTRO_TAG}
 
-ARG AS_PDNS_VERSION=4.5.1
+ARG AS_PDNS_VERSION=4.5.2
 
 ENV PDNS_setuid=${PDNS_setuid:-pdns} \
   PDNS_setgid=${PDNS_setgid:-pdns} \
@@ -18,7 +18,7 @@ RUN apt update \
   && apt -y install python3-venv python3-pip libboost-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev libboost-context-dev libssl-dev libsnmp-dev g++ make pkg-config libluajit-5.1-dev \
   && pip3 install --no-cache-dir envtpl
 
-RUN apt -y install default-mysql-client default-libmysqlclient-dev libboost-program-options-dev libcurl4-openssl-dev
+RUN apt -y install libcurl4-openssl-dev netcat-openbsd default-mysql-client default-libmysqlclient-dev libboost-program-options-dev
 
 RUN mv /srv/entrypoint.sh / \
   && cat /tmp/pdns-${AS_PDNS_VERSION}.tar.bz2 | tar xj -C /tmp \

@@ -132,13 +132,13 @@ So for example, to build the PowerDNS authoritative server version 4.5.0 on Alpi
 The build-realease command assumes the following parameter defaults;
 
 - Image Tag Name: latest
-- PDNS Version: 4.5.1
+- PDNS Version: 4.5.2
 - Distro Name: alpine
 - Distro Tag: 3.14
 
 This means that running the build-release command with no parameters would be the equivalent of executing the following shell command:
 
-    build-release latest 4.5.1 alpine 3.14
+    build-release latest 4.5.2 alpine 3.14
 
 When the image is tagged during compilation, the repository portion of the image tag is derived from the contents of the .as/docker-registry file and the tag from the first parameter provided to the build-release command.
 
