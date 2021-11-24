@@ -18,7 +18,7 @@ In addition, the PowerDNS Authoritative Server is the leading DNSSEC implementat
 
 ## TL;DR
 
-    docker run -d -p 12053:53/udp -p 12054:53 -e PDNS_local_address=0.0.0.0 azoriansolutions/powerdns-nameserver
+    docker run -d -p 12053:53/udp -p 12053:53 -e PDNS_local_address=0.0.0.0 azoriansolutions/powerdns-nameserver
 
 ## Azorian Solutions Docker image strategy
 
@@ -30,8 +30,13 @@ All documentation will be written with the assumption that you are already reaso
 
 When building this image, support for the following features have been compiled into the server binaries.
 
-- Lua
+- OpenSSL ecdsa
+- ed25519
+- ed448
+- Lua (luajit)
+- Lua records
 - SNMP
+- libsodium
 
 ## Supported tags
 
@@ -39,22 +44,19 @@ When building this image, support for the following features have been compiled 
 
 ### Alpine Linux
 
-- 4.5.2, 4.5.2-alpine, 4.5.2-alpine-3.14, latest
-- 4.5.2-mysql, 4.5.2-alpine-mysql, 4.5.2-alpine-3.14-mysql
-- *4.5.2-pgsql, 4.5.2-alpine-pgsql, 4.5.2-alpine-3.14-pgsql
-- *4.5.2-sqlite, 4.5.2-alpine-sqlite, 4.5.2-alpine-3.14-sqlite
-- *4.5.2-odbc, 4.5.2-alpine-odbc, 4.5.2-alpine-3.14-odbc
-- 4.5.1, 4.5.1-alpine, 4.5.1-alpine-3.14
-- 4.5.1-mysql, 4.5.1-alpine-mysql, 4.5.1-alpine-3.14-mysql
+- 4.5.2, 4.5.2-alpine, 4.5.2-alpine-3.14, alpine, latest
+- 4.5.2-mysql, 4.5.2-alpine-mysql, 4.5.2-alpine-3.14-mysql, alpine-mysql, mysql
+- *4.5.2-pgsql, 4.5.2-alpine-pgsql, 4.5.2-alpine-3.14-pgsql, alpine-pgsql
+- *4.5.2-sqlite, 4.5.2-alpine-sqlite, 4.5.2-alpine-3.14-sqlite, alpine-sqlite
+- *4.5.2-odbc, 4.5.2-alpine-odbc, 4.5.2-alpine-3.14-odbc, alpine-odbc
 
 ### Debian Linux
 
-- *4.5.2-debian, 4.5.2-debian-11.1-slim
-- 4.5.2-debian-mysql, 4.5.2-debian-11.1-slim-mysql
-- *4.5.2-debian-pgsql, 4.5.2-debian-11.1-slim-pgsql
-- *4.5.2-debian-sqlite, 4.5.2-debian-11.1-slim-sqlite
-- *4.5.2-debian-odbc, 4.5.2-debian-11.1-slim-odbc
-- 4.5.1-debian-mysql, 4.5.1-debian-11.1-slim-mysql
+- *4.5.2-debian, 4.5.2-debian-11.1-slim, debian
+- 4.5.2-debian-mysql, 4.5.2-debian-11.1-slim-mysql, debian-mysql
+- *4.5.2-debian-pgsql, 4.5.2-debian-11.1-slim-pgsql, debian-pgsql
+- *4.5.2-debian-sqlite, 4.5.2-debian-11.1-slim-sqlite, debian-sqlite
+- *4.5.2-debian-odbc, 4.5.2-debian-11.1-slim-odbc, debian-odbc
 
 ## Deploying this image
 
@@ -82,15 +84,15 @@ This would result in the following line being added to the /etc/pdns/pdns.conf f
 
 #### Approach #2
 
-With this approach, you may create traditional PowerDNS authoritative server conf files and map them to a specific location inside of the container. This will cause each mapped configuration file to be loaded each time the container is started. For example, say your Docker / Podman host has a PowerDNS authoritative server conf file stored at /srv/pdns-server.conf and you want to load that in your PowerDNS authoritative server container. You will created a volume mapping that will link the conf file on the host to a specific location in the container. The mapping would look something like this;
+With this approach, you may create traditional PowerDNS authoritative server conf files and map them to a specific location inside of the container. This will cause each mapped configuration file to be loaded each time the container is started. For example, say your Docker / Podman host has a PowerDNS authoritative server conf file stored at /srv/pdns-server.conf and you want to load that in your PowerDNS authoritative server container. You will create a volume mapping that will link the conf file on the host to a specific location in the container. The mapping would look something like this;
 
-    /srv/pdns-server.conf:/etc/pdns/conf.d/10-pdns.conf
+    /srv/pdns-server.conf:/etc/pdns/pdns.conf
 
 ### Deploy with Docker Run
 
 To run a simple container on Docker with this image, execute the following Docker command;
 
-    docker run -d -p 12053:53/udp -p 12054:53 -e PDNS_local_address=0.0.0.0 azoriansolutions/powerdns-nameserver
+    docker run -d -p 12053:53/udp -p 12053:53 -e PDNS_local_address=0.0.0.0 azoriansolutions/powerdns-nameserver
 
 If all goes well and the container starts, you should now be able to query this DNS authoritative server using dig;
 
@@ -105,13 +107,13 @@ To run this image using Docker Compose, create a YAML file with a name and place
     version: "3.3"
     services:
       nameserver:
-        image: azoriansolutions/powerdns-nameserver:latest
+        image: azoriansolutions/powerdns-nameserver
         restart: unless-stopped
         environment:
           - PDNS_local_address=0.0.0.0
         ports:
           - "12053:53/udp"
-          - "12054:53"
+          - "12053:53"
 
 Then execute the following Docker Compose command;
 
