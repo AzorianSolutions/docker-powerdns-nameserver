@@ -46,9 +46,9 @@ When building this image, support for the following features have been compiled 
 
 - 4.5.2, 4.5.2-alpine, 4.5.2-alpine-3.14, alpine, latest
 - 4.5.2-mysql, 4.5.2-alpine-mysql, 4.5.2-alpine-3.14-mysql, alpine-mysql, mysql
-- *4.5.2-pgsql, 4.5.2-alpine-pgsql, 4.5.2-alpine-3.14-pgsql, alpine-pgsql
-- *4.5.2-sqlite, 4.5.2-alpine-sqlite, 4.5.2-alpine-3.14-sqlite, alpine-sqlite
-- *4.5.2-odbc, 4.5.2-alpine-odbc, 4.5.2-alpine-3.14-odbc, alpine-odbc
+- *4.5.2-pgsql, 4.5.2-alpine-pgsql, 4.5.2-alpine-3.14-pgsql, alpine-pgsql, pgsql
+- *4.5.2-sqlite, 4.5.2-alpine-sqlite, 4.5.2-alpine-3.14-sqlite, alpine-sqlite, sqlite
+- *4.5.2-odbc, 4.5.2-alpine-odbc, 4.5.2-alpine-3.14-odbc, alpine-odbc, odbc
 
 ### Debian Linux
 
