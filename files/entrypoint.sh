@@ -37,6 +37,8 @@ convert_file_vars
 config_file=/etc/pdns/pdns.conf
 
 # Create the PowerDNS config file from the service config template
+cd /srv
+source venv/bin/activate
 envtpl < /srv/service.conf.tpl > $config_file
 
 # Apply appropriate ownership to the PowerDNS config file
