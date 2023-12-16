@@ -78,6 +78,8 @@ verify_mysql_ready "${PDNS_gmysql_host}" "${PDNS_gmysql_port:-3306}"
 config_file=/etc/pdns/pdns.conf
 
 # Create the PowerDNS config file from the service config template
+cd /srv
+source venv/bin/activate
 envtpl < /srv/service.conf.tpl > $config_file
 
 # Apply appropriate ownership to the PowerDNS config file

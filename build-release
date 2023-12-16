@@ -1,27 +1,27 @@
 #!/bin/bash
 
 path=$PWD
-tag=latest
-version=4.5.2
+tag=alpine-mysql
+version=4.8.3
 distro=alpine
-distro_tag=3.14
+distro_tag=3.19
 
-if [ ! -z "$1" ];
+if [ -n "$1" ];
 then
     tag=$1
 fi
 
-if [ ! -z "$2" ];
+if [ -n "$2" ];
 then
     version=$2
 fi
 
-if [ ! -z "$3" ];
+if [ -n "$3" ];
 then
     distro=$3
 fi
 
-if [ ! -z "$4" ];
+if [ -n "$4" ];
 then
     distro_tag=$4
 fi
