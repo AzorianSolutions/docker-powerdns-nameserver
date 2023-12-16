@@ -1,0 +1,23 @@
+#!/bin/bash
+
+tag=latest
+
+if [ -n "$1" ];
+then
+    tag=$1
+fi
+
+
+if [ -f "$PWD/.as/docker-registry" ];
+then
+    docker_registry=`cat $PWD/.as/docker-registry`
+    docker tag $docker_registry:$tag $docker_registry:alpine
+    docker tag $docker_registry:$tag $docker_registry:4.8.3
+    docker tag $docker_registry:$tag $docker_registry:4.8.3-alpine
+    docker tag $docker_registry:$tag $docker_registry:4.8.3-alpine-3.19
+else
+    echo "Could not find a Docker registry URL file at $PWD/.as/docker-registry"
+    exit 1
+fi
+
+exit
