@@ -15,6 +15,11 @@ then
     docker tag $docker_registry:$tag $docker_registry:4.8.3
     docker tag $docker_registry:$tag $docker_registry:4.8.3-alpine
     docker tag $docker_registry:$tag $docker_registry:4.8.3-alpine-3.19
+    docker push $docker_registry:$tag
+    docker push $docker_registry:alpine
+    docker push $docker_registry:4.8.3
+    docker push $docker_registry:4.8.3-alpine
+    docker push $docker_registry:4.8.3-alpine-3.19
 else
     echo "Could not find a Docker registry URL file at $PWD/.as/docker-registry"
     exit 1
